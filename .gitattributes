@@ -1,0 +1,9 @@
+# Ensure text files have LF endings
+*.py text eol=lf
+*.txt text eol=lf
+*.json text eol=lf
+
+# Keep binary files as binary
+*.pdf binary
+*.png binary
+*.jpg binary

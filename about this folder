@@ -1,0 +1,18 @@
+classes.json---- saves all the classes registered
+get.py---- handles the generate and export timetable, it generates and eports the timetable in pdf, 
+            in downloads dir of the user and gets more additional rules from rules.py
+main.py----- main page, runs the main app, gui, etc
+mc.py----- handles manage classes button, lets user to add, remove, and edit classes registered
+msc.json----- holds the data for manage teacher's schedule, all the classesteacher is assigned 
+              in and number of their periods in hat class per week
+mt.py----- hndles maage teachers, allows add, remove, edit teachers, and manage teacher's schedule
+mts.py----- this manages the manage teacher's schedule, by taking data from teach_dat.json, and 
+            sores the new schedule in msc.json
+rules.py ----- holds the rules for generating the timetable, such that no teacher can have more 
+               two classes at one time, and cca, and mpt, and lab classes
+s.py----- this manages the settings button, in which it has about us, version, and help
+teach_dat.json----- holds the data for teacher's name and the subjects they teach
+version.txt----- holds the version of the app, and is shown in settings when user clicks version,
+                 and also helps for updating the app when there is a new version, by comparing 
+                 the version in this file with the version in the github repo
+                                                       

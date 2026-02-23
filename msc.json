@@ -1,0 +1,30 @@
+{
+    "SHERSHAD": {
+        "subject": "ENGLISH",
+        "classes": {}
+    },
+    "RAJANI": {
+        "subject": "PHYSICS",
+        "classes": {}
+    },
+    "SOJU": {
+        "subject": "CS",
+        "classes": {}
+    },
+    "SAJIMON": {
+        "subject": "CHEMISTRY",
+        "classes": {}
+    },
+    "MOLLY": {
+        "subject": "LIBRARY",
+        "classes": {}
+    },
+    "PET": {
+        "subject": "PT",
+        "classes": {}
+    },
+    "JAYA": {
+        "subject": "MATHS",
+        "classes": {}
+    }
+}
