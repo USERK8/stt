@@ -1,0 +1,3 @@
+# stt
+this is a repo, made for schools, for timetable management, with active generation, and ready to install app, in windows andlinux, but this is only windows downloadable file
+so for linux, we suggest installing the dependencies first, till an app for linux is made too...
