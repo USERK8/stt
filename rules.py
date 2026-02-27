@@ -4,6 +4,30 @@ DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
 PERIODS_PER_DAY = 8
 
 
+# ---------------------------------------
+# CLASS SORTING (NEW - SAFE)
+# ---------------------------------------
+def sort_classes(class_list):
+    """
+    Ensures order like:
+    6A, 6B, 6C, 7A, 7B ... 12C
+    """
+    def sort_key(cls):
+        num = ""
+        sec = ""
+        for ch in cls:
+            if ch.isdigit():
+                num += ch
+            else:
+                sec += ch
+        try:
+            return (int(num), sec)
+        except:
+            return (999, cls)
+
+    return sorted(class_list, key=sort_key)
+
+
 def apply_rules(timetable, msc_data):
     """
     Apply school rules:
@@ -65,7 +89,7 @@ def apply_rules(timetable, msc_data):
         if table[day][period] or table[day][period + 1]:
             return False
 
-        # Must be different day
+        # Only one practical block per day
         if day in practical_days[cls]:
             return False
 
@@ -100,6 +124,7 @@ def apply_rules(timetable, msc_data):
 
         while cs_blocks[cls] < 3:
             placed = False
+
             for day in range(len(DAYS)):
                 for period in range(PERIODS_PER_DAY - 1):
                     if can_place_block(cls, day, period, "CS"):
@@ -108,18 +133,22 @@ def apply_rules(timetable, msc_data):
                         break
                 if placed:
                     break
+
             if not placed:
-                break  # avoid infinite loop
+                break  # prevent infinite loop
 
     # ---------------------------------------
     # PHY/CHEM PRACTICALS (2 BLOCKS SCIENCE ONLY)
     # ---------------------------------------
+    science_classes = ["11A", "11B", "12A", "12B"]
+
     for cls in actual_classes:
-        if cls.upper() not in ["11A", "11B", "12A", "12B"]:
+        if cls.upper() not in science_classes:
             continue
 
         while phychem_blocks[cls] < 2:
             placed = False
+
             for day in range(len(DAYS)):
                 for period in range(PERIODS_PER_DAY - 1):
                     if can_place_block(cls, day, period, "PHY"):
@@ -128,6 +157,7 @@ def apply_rules(timetable, msc_data):
                         break
                 if placed:
                     break
+
             if not placed:
                 break
 
@@ -144,13 +174,13 @@ def apply_rules(timetable, msc_data):
             for period in range(PERIODS_PER_DAY):
                 cell = main_table[day][period]
 
-                if cell and cell["subject"] == "Maths":
+                if cell and cell.get("subject") == "Maths":
                     for dep in dependent_classes:
                         if exists(dep):
                             dep_table = get(dep)
                             dep_cell = dep_table[day][period]
 
-                            if dep_cell and dep_cell["subject"] not in ["IP", "Hindi", "Maths"]:
+                            if dep_cell and dep_cell.get("subject") not in ["IP", "Hindi", "Maths"]:
                                 dep_table[day][period] = None
 
     # 11th sync
