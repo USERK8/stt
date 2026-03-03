@@ -1,3 +1,5 @@
+# get.py
+
 import json, os, random, copy
 from reportlab.lib.pagesizes import A4
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer, PageBreak
@@ -10,6 +12,7 @@ MSC_FILE = "msc.json"
 DAYS = ["Mon","Tue","Wed","Thu","Fri","Sat"]
 PERIODS_PER_DAY = 8
 DOWNLOADS = os.path.join(os.path.expanduser("~"), "Downloads")
+BACKEND_FILE = os.path.join(os.path.dirname(__file__), "backend_details.json")
 
 def generate_timetable_pdfs():
     if not os.path.exists(MSC_FILE):
@@ -31,14 +34,12 @@ def generate_timetable_pdfs():
     for attempt in range(40):
         # Initialize timetable
         timetable = {cls: [[None]*PERIODS_PER_DAY for _ in DAYS] for cls in classes}
-
-        # Global teacher availability across all classes
         teacher_avail_global = {teacher: [[True]*PERIODS_PER_DAY for _ in DAYS] for teacher in msc_data.keys()}
 
-        # APPLY RULES FROM rules.py
+        # Apply rules from rules.py
         timetable = apply_rules(timetable, msc_data)
 
-        # Build remaining tasks from MSC
+        # Build tasks from MSC
         tasks = []
         for teacher, info in msc_data.items():
             subject = info["subject"]
@@ -48,7 +49,7 @@ def generate_timetable_pdfs():
 
         random.shuffle(tasks)
 
-        # Distribute normal tasks respecting max 2 per day
+        # Distribute tasks
         for task in tasks:
             cls = task["class"]
             teacher = task["teacher"]
@@ -70,30 +71,16 @@ def generate_timetable_pdfs():
                         break
                 if placed: break
 
-        # -----------------------------
-        # FILL EMPTY CELLS WITH ALLOWED SUBJECTS
-        # -----------------------------
+        # Fill empty cells
         for cls in classes:
             table = timetable[cls]
-
-            # Determine allowed subjects for this class group
             if cls.startswith(("11","12")):
-                # 11-12: all subjects except PET, English
-                allowed = []
-                for tname, info in msc_data.items():
-                    if cls in info.get("classes", {}) and info["subject"] not in ["PET","English"]:
-                        allowed.append(info["subject"])
-                allowed = list(set(allowed))
+                allowed = [t["subject"] for t in msc_data.values() if cls in t.get("classes", {}) and t["subject"] not in ["PET","English"]]
             else:
-                # 6-10: all subjects except DL, ART, VE, PET
-                allowed = []
-                for tname, info in msc_data.items():
-                    if cls in info.get("classes", {}) and info["subject"] not in ["DL","ART","VE","PET"]:
-                        allowed.append(info["subject"])
-                allowed = list(set(allowed))
+                allowed = [t["subject"] for t in msc_data.values() if cls in t.get("classes", {}) and t["subject"] not in ["DL","ART","VE","PET"]]
+            allowed = list(set(allowed))
 
             for day_idx, day in enumerate(table):
-                # count how many of each subject already today
                 daily_count = {}
                 for p in range(PERIODS_PER_DAY):
                     cell = day[p]
@@ -105,7 +92,6 @@ def generate_timetable_pdfs():
                         random.shuffle(allowed)
                         placed = False
                         for sub in allowed:
-                            # find teacher for this class-sub in MSC
                             teacher = None
                             for tname, info in msc_data.items():
                                 if info["subject"] == sub and cls in info.get("classes", {}):
@@ -113,16 +99,12 @@ def generate_timetable_pdfs():
                                     break
                             if not teacher:
                                 continue
-                            # check global teacher availability
-                            if teacher_avail_global[teacher][day_idx][period]:
-                                # allow up to 3 of same subject in this filler pass
-                                if daily_count.get(sub,0) < 3:
-                                    day[period] = {"subject": sub, "teacher": teacher}
-                                    daily_count[sub] = daily_count.get(sub,0) + 1
-                                    teacher_avail_global[teacher][day_idx][period] = False
-                                    placed = True
-                                    break
-                        # if can't place anything, leave empty (rare)
+                            if teacher_avail_global[teacher][day_idx][period] and daily_count.get(sub,0) < 3:
+                                day[period] = {"subject": sub, "teacher": teacher}
+                                daily_count[sub] = daily_count.get(sub,0) + 1
+                                teacher_avail_global[teacher][day_idx][period] = False
+                                placed = True
+                                break
 
         # Count empty slots
         empty_count = sum(
@@ -138,9 +120,29 @@ def generate_timetable_pdfs():
     timetable = best_timetable
 
     # -----------------------------
-    # GENERATE PDF
+    # Build backend details for teachers
     # -----------------------------
-    pdf_path = os.path.join(DOWNLOADS, "All_Classes_6_to_12_Timetable.pdf")
+    backend_data = {}
+    for teacher, info in msc_data.items():
+        grid = [[None]*PERIODS_PER_DAY for _ in DAYS]
+        for cls in timetable:
+            for day_idx in range(len(DAYS)):
+                for period_idx in range(PERIODS_PER_DAY):
+                    cell = timetable[cls][day_idx][period_idx]
+                    if cell and cell["teacher"] == teacher:
+                        grid[day_idx][period_idx] = cls
+        backend_data[teacher] = {
+            "subject": info["subject"],
+            "grid": grid
+        }
+
+    with open(BACKEND_FILE, "w") as f:
+        json.dump(backend_data, f, indent=4)
+
+    # -----------------------------
+    # Generate timetable PDF
+    # -----------------------------
+    pdf_path = os.path.join(DOWNLOADS, "timetable.pdf")
     styles = getSampleStyleSheet()
     doc = SimpleDocTemplate(pdf_path, pagesize=A4)
     content = []
@@ -176,4 +178,4 @@ def generate_timetable_pdfs():
         content.append(PageBreak())
 
     doc.build(content)
-    return f"Timetable generated using repair-pass allocation.\nEmpty slots: {best_empty}\nExported to {pdf_path}"
+    return f"Timetable generated.\nEmpty slots: {best_empty}\nExported to {pdf_path}.\nBackend file saved as backend_details.json"

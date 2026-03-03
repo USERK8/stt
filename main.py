@@ -9,7 +9,6 @@ from PyQt6.QtWidgets import (
     QLabel,
     QFrame,
     QStackedWidget,
-    QMessageBox
 )
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QFont
@@ -18,7 +17,7 @@ from s import SettingsPage
 from mc import ManageClasses
 from mt import ManageTeachers
 
-from get import generate_timetable_pdfs
+from pet import PDFExporterPage
 from update import check_for_update
 
 class MainWindow(QWidget):
@@ -37,6 +36,7 @@ class MainWindow(QWidget):
         self.ManageClasses = ManageClasses(self)
         self.settings_page = SettingsPage(self)
         self.manage_teachers_page = ManageTeachers(self)
+        self.pdf_exporter_page = PDFExporterPage(self)
         self.home_page = self.create_home_page()
 
         # Add pages to stack
@@ -44,6 +44,7 @@ class MainWindow(QWidget):
         self.stack.addWidget(self.settings_page)
         self.stack.addWidget(self.ManageClasses)
         self.stack.addWidget(self.manage_teachers_page)
+        self.stack.addWidget(self.pdf_exporter_page)
 
         # Layout
         main_layout = QVBoxLayout()
@@ -53,6 +54,7 @@ class MainWindow(QWidget):
         self.apply_base_style()
         self.dynamic_scaling_home()  # initial scaling
 
+    # ---------------- Base style ----------------
     def apply_base_style(self):
         self.setStyleSheet("""
             QWidget {
@@ -87,6 +89,7 @@ class MainWindow(QWidget):
             }
         """)
 
+    # ---------------- Home page ----------------
     def create_home_page(self):
         page = QWidget()
         self.home_layout = QVBoxLayout()
@@ -108,7 +111,7 @@ class MainWindow(QWidget):
 
         btn_manage_classes = QPushButton("Manage Classes")
         btn_manage_teachers = QPushButton("Manage Teachers")
-        btn_generate = QPushButton("Generate & Export Timetable")
+        btn_generate = QPushButton("Select the PDF Exporter Type")
         btn_settings = QPushButton("Settings")
 
         # Connect navigation
@@ -121,7 +124,9 @@ class MainWindow(QWidget):
         btn_settings.clicked.connect(
             lambda: self.stack.setCurrentWidget(self.settings_page)
         )
-        btn_generate.clicked.connect(self.run_generate_timetable)
+        btn_generate.clicked.connect(
+            lambda: self.stack.setCurrentWidget(self.pdf_exporter_page)
+        )
 
         self.buttons.extend([
             btn_manage_classes,
@@ -141,8 +146,8 @@ class MainWindow(QWidget):
         page.setLayout(self.home_layout)
         return page
 
+    # ---------------- Dynamic scaling ----------------
     def resizeEvent(self, event):
-        # Dynamic scaling on resize
         self.dynamic_scaling_home()
         if hasattr(self, "ManageClasses") and hasattr(self.ManageClasses, "dynamic_scaling"):
             self.ManageClasses.dynamic_scaling()
@@ -150,6 +155,8 @@ class MainWindow(QWidget):
             self.manage_teachers_page.dynamic_scaling()
         if hasattr(self, "settings_page") and hasattr(self.settings_page, "dynamic_scaling"):
             self.settings_page.dynamic_scaling()
+        if hasattr(self, "pdf_exporter_page") and hasattr(self.pdf_exporter_page, "dynamic_scaling"):
+            self.pdf_exporter_page.dynamic_scaling()
         super().resizeEvent(event)
 
     def dynamic_scaling_home(self):
@@ -206,14 +213,6 @@ class MainWindow(QWidget):
 
     def go_home(self):
         self.stack.setCurrentWidget(self.home_page)
-
-    # ------------------------ Generate Timetable ------------------------
-    def run_generate_timetable(self):
-        try:
-            result_msg = generate_timetable_pdfs()
-            QMessageBox.information(self, "Done", result_msg)
-        except Exception as e:
-            QMessageBox.critical(self, "Error", f"Error generating timetable:\n{e}")
 
 
 if __name__ == "__main__":
