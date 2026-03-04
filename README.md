@@ -4,14 +4,7 @@ _**The system intelligently handles:**_
 - Teacher workload limitations
 - Class availability constraints
 - Lab period allocation for Classes 11 & 12
-- Mathematics period distribution for:
-    |
-    |- Bio-Maths students
-    |
-    |- Computer Science–Maths students
-    |
-    |- Commerce with Maths students
-
+- Mathematics period distribution for: _Bio-Maths students_, _Computer Science–Maths students_, _Commerce with Maths students_
 - Structured scheduling with fully enforced constraints
 - Balanced and conflict-free timetable construction
 - Every timetable generated is logically structured, optimized, and constraint-aware.
@@ -49,11 +42,9 @@ _**💻 Platform Support**_
 
 - Currently available for Linux (64-bit)
 - Windows users can:
-       |
-       |-----> Download the source code and run it using any Python compiler
-       |
-       |----->Or wait for the upcoming official Windows executable release
-
+**1. Download the source code and run it using any Python compiler**
+**2. Or wait for the upcoming official Windows executable release**
+       
 
 
 _**🛠 Built With**_
@@ -123,30 +114,19 @@ ____________________________________________________
 - Double-click the main file to run it.
 
 - On first launch:
-    |
-    | ----> The app will prompt for updates.
-    |
-    | ----> Click Yes and allow it to complete installation.
-
+**1. The app will prompt for updates.
+2. Click Yes and allow it to complete installation.**
 
 **5️⃣ Using the App**
 
 - After setup, you can:
-     |
-     |-----> Modify teacher names
-     |
-     |-----> Adjust class availability
-     |
-     |-----> Assign subjects
-     |
-     |------> Generate:
-                |
-                |-----> Class-wise timetable
-                |
-                |-----> Teacher-wise timetable
-                |
-                |-----> Day-wise timetable
-  
+1. Modify teacher names
+2. Adjust class availability
+3. Assign subjects
+4. Generate the timetable in the format for:
+(i) Class-wise timetable
+(ii)Teacher-wise timetable
+(iii)Day-wise timetable
 - Timetable management becomes faster, structured, and far more efficient.
 
 
