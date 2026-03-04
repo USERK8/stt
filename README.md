@@ -114,8 +114,8 @@ ____________________________________________________
 - Double-click the main file to run it.
 
 - On first launch:
-**1. The app will prompt for updates.
-2. Click Yes and allow it to complete installation.**
+**1. The app will prompt for updates.**
+**2. Click Yes and allow it to complete installation.**
 
 **5️⃣ Using the App**
 
