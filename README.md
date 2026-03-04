@@ -21,7 +21,7 @@ _**🚀 Transforming School Timetable Management**_
 _**🏫 Current Features**_
 
 - Generates timetables for Classes 6 to 12
-- Three sections per class (currently hardcoded)
+- Three sections per class (in app and can be changed)
 - Teacher-wise timetable generation
 - Class-wise timetable generation
 - Day-wise timetable generation
