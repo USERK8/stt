@@ -1,6 +1,9 @@
 # main.py
 
 import sys
+import threading
+import multiprocessing
+
 from PyQt6.QtWidgets import (
     QApplication,
     QWidget,
@@ -9,16 +12,17 @@ from PyQt6.QtWidgets import (
     QLabel,
     QFrame,
     QStackedWidget,
+    QMessageBox,
 )
-from PyQt6.QtCore import Qt
+from PyQt6.QtCore import Qt, QMetaObject, Q_ARG, pyqtSlot
 from PyQt6.QtGui import QFont
 
 from s import SettingsPage
 from mc import ManageClasses
 from mt import ManageTeachers
-
 from pet import PDFExporterPage
 from update import check_for_update
+
 
 class MainWindow(QWidget):
     def __init__(self):
@@ -27,17 +31,14 @@ class MainWindow(QWidget):
         self.setWindowTitle("Timetable Gen")
         self.showMaximized()
 
-        # Check for updates on startup
-        check_for_update(parent=self)
-
         self.stack = QStackedWidget()
 
         # Create pages
-        self.ManageClasses = ManageClasses(self)
-        self.settings_page = SettingsPage(self)
-        self.manage_teachers_page = ManageTeachers(self)
-        self.pdf_exporter_page = PDFExporterPage(self)
-        self.home_page = self.create_home_page()
+        self.ManageClasses         = ManageClasses(self)
+        self.settings_page         = SettingsPage(self)
+        self.manage_teachers_page  = ManageTeachers(self)
+        self.pdf_exporter_page     = PDFExporterPage(self)
+        self.home_page             = self.create_home_page()
 
         # Add pages to stack
         self.stack.addWidget(self.home_page)
@@ -52,7 +53,18 @@ class MainWindow(QWidget):
         self.setLayout(main_layout)
 
         self.apply_base_style()
-        self.dynamic_scaling_home()  # initial scaling
+        self.dynamic_scaling_home()
+
+        # Check for updates in background — never blocks the UI
+        threading.Thread(target=self._check_update_async, daemon=True).start()
+
+    # ---------------- Async update check ----------------
+    def _check_update_async(self):
+        """Runs on a background thread so startup is never delayed."""
+        try:
+            check_for_update(parent=None)   # don't pass parent — we're off the main thread
+        except Exception:
+            pass   # update check failing should never crash the app
 
     # ---------------- Base style ----------------
     def apply_base_style(self):
@@ -109,12 +121,11 @@ class MainWindow(QWidget):
         # Buttons
         self.buttons = []
 
-        btn_manage_classes = QPushButton("Manage Classes")
-        btn_manage_teachers = QPushButton("Manage Teachers")
-        btn_generate = QPushButton("Select the PDF Exporter Type")
-        btn_settings = QPushButton("Settings")
+        btn_manage_classes   = QPushButton("Manage Classes")
+        btn_manage_teachers  = QPushButton("Manage Teachers")
+        btn_generate         = QPushButton("Select the PDF Exporter Type")
+        btn_settings         = QPushButton("Settings")
 
-        # Connect navigation
         btn_manage_classes.clicked.connect(
             lambda: self.stack.setCurrentWidget(self.ManageClasses)
         )
@@ -164,9 +175,7 @@ class MainWindow(QWidget):
             return
 
         width = self.width()
-        height = self.height()
 
-        # Title scaling
         title_size = max(40, width // 20)
         self.title.setFont(QFont("Arial", title_size, QFont.Weight.Bold))
         self.title.setStyleSheet("""
@@ -181,9 +190,8 @@ class MainWindow(QWidget):
             }
         """)
 
-        # Button scaling
         button_font_size = max(18, width // 60)
-        padding = max(15, width // 120)
+        padding          = max(15, width // 120)
 
         for btn in self.buttons:
             btn.setFont(QFont("Arial", button_font_size))
@@ -215,7 +223,18 @@ class MainWindow(QWidget):
         self.stack.setCurrentWidget(self.home_page)
 
 
+# -------------------------------------------------------
+# ENTRY POINT
+# multiprocessing.freeze_support() is required on Windows
+# when the app is bundled (e.g. with PyInstaller).
+# The `if __name__ == "__main__"` guard is required for
+# multiprocessing to work correctly on Windows — without it,
+# spawning a worker process recursively re-runs the whole
+# script and crashes.
+# -------------------------------------------------------
+
 if __name__ == "__main__":
+    multiprocessing.freeze_support()
     app = QApplication(sys.argv)
     window = MainWindow()
     window.show()
