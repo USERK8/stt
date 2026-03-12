@@ -38,6 +38,38 @@ Every timetable generated is **optimized, constraint-aware, and logically struct
 
 ---
 
+## 📈 Latest Version Updates – STT
+
+### 🟢 v1.0.0
+- ⚡ Firmware development & basic app GUI
+
+### 🟡 v2.3.6
+- 🛠 Initial generation features added
+- ✨ Minor GUI polish using GTK
+
+### 🔵 v4.3.5
+- 🧩 Advanced controller for full customization:
+  - 👩‍🏫 Add teacher names & classes
+  - 📅 Manage schedules
+  - 📄 Generate PDFs, including class-wise timetables
+
+### 🟣 v5.6.0 – Major Update!
+- 🔄 Full switch to **PyQt6** for wide accessibility
+- 🧠 Smarter, conflict-free timetable allotments
+- 🛠 Practical session management & enhanced GUI
+
+### 🔶 v6.0.3
+- 🐧 Linux downloadable distro
+- 📊 Expanded PDF options: class-wise, teacher-wise, day-wise (in development)
+- 🎨 Smoother & more responsive GUI
+
+### 🔥 v7.3.1 – Ultra-Fast STT Generator
+- ⚡ Lightning-fast & reliable timetable creation
+- ⏱ Live progress tracking
+- 🏆 Best allotment model yet, with extended GUI features & complete teacher/class management
+
+---
+
 ## 🔐 Privacy & Security
 
 - No client-side data collection  
@@ -60,14 +92,14 @@ Every timetable generated is **optimized, constraint-aware, and logically struct
 - Continuous logic improvements, UI updates, and bug fixes
 
 ---
-_____________________________________________________________________________________________________________
+
 ## 🐧 Linux Installation Manual
-_____________________________________________________________________________________________________________
+
 ### 1️⃣ System Requirements
 
 - 64-bit Linux OS (Ubuntu, Kali, Debian, Fedora, Arch, Pop!\_OS recommended)  
 - Latest Python version
-_____________________________________________________________________________________________________________
+
 ### 2️⃣ Install Dependencies
 
 **Ubuntu / Kali / Debian**:
@@ -78,64 +110,36 @@ libncurses5-dev libncursesw5-dev libreadline-dev libsqlite3-dev \
 libgdbm-dev libdb5.3-dev libbz2-dev libexpat1-dev liblzma-dev \
 tk-dev libffi-dev wget
 ```
-_____________________________________________________________________________________________________________
-3️⃣ Download the App
+### 3️⃣ Download the App
 
-Go to the Releases
- section
+Go to the Releases section, download the file named `main`, and place it in a separate folder to avoid clutter during updates.
 
-Download the file named main
+### 4️⃣ Make Executable
 
-Place it in a separate folder to avoid clutter during updates
-_____________________________________________________________________________________________________________
-4️⃣ Make Executable
-
-Open the folder
-
-Right-click the file → Properties
-
-Enable Executable as Program
-
-Double-click to run
-
+Open the folder → Right-click the file → Properties → Enable Executable → Double-click to run.  
 On first launch: click Yes when prompted for updates.
-_____________________________________________________________________________________________________________
-5️⃣ Using the App
 
-Modify teacher names
+### 5️⃣ Using the App
 
-Adjust class availability
+* Modify teacher names
+* Adjust class availability
+* Assign subjects
+* Generate timetables: class-wise, teacher-wise, day-wise
+* Makes timetable management fast, structured, and efficient
 
-Assign subjects
+### 🪟 Windows Users
 
-Generate timetables:
+Official executable under development.  
+Source code runnable with any Python compiler.
 
-Class-wise
+### ⚠️ Trial Version Notice
 
-Teacher-wise
+This is a trial version.  
+Active development continues.  
+Built by USERK8.  
+No user data is collected.
 
-Day-wise
+### 📩 Support
 
-Makes timetable management fast, structured, and efficient
-_____________________________________________________________________________________________________________
-🪟 Windows Users
-
-Official executable under development
-
-Source code runnable with any Python compiler
-_____________________________________________________________________________________________________________
-⚠️ Trial Version Notice
-
-This is a trial version
-
-Active development continues
-
-Built by USERK8
-
-No user data is collected
-_____________________________________________________________________________________________________________
-📩 Support
-
-Email: userk8.dev@gmail.com
-
+Email: userk8.dev@gmail.com  
 Thanks for trying STT! Your feedback helps shape smarter, future-ready schools.
