@@ -24,6 +24,13 @@ Thumbs.db
 # Ignore secrets / local config
 *.env
 
+# User data — never overwrite with updates
+classes.json
+msc.json
+teach_dat.json
+class.json
+backend_details.json
+
 # PyInstaller build artifacts
 build/
 dist/
