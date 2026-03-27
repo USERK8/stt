@@ -11,14 +11,15 @@ An advanced **constraint-based timetable generator** built for schools following
 
 STT intelligently generates school timetables while respecting:
 
-- Teacher workload limitations
-- Class availability constraints
-- Lab period allocation for Classes 11 & 12
+- Teacher workload limitations  
+- Class availability constraints  
+- Lab period allocation for Classes 11 & 12  
 - Mathematics period distribution for:
   - Bio-Maths students  
   - Computer Science–Maths students  
-  - Commerce with Maths students
+  - Commerce with Maths students  
 - Fully structured, conflict-free scheduling  
+- Export of generated timetables in **Excel format** for easy customization and editing  
 
 Every timetable generated is **optimized, constraint-aware, and logically structured**.
 
@@ -34,6 +35,7 @@ Every timetable generated is **optimized, constraint-aware, and logically struct
 - Teacher-wise timetable  
 - Class-wise timetable  
 - Day-wise timetable  
+- Export timetables to **Excel files**  
 - Fully offline functionality (some updates may require internet)
 
 ---
@@ -42,14 +44,14 @@ Every timetable generated is **optimized, constraint-aware, and logically struct
 
 - No client-side data collection  
 - Completely self-contained  
-- No background tracking
+- No background tracking  
 
 ---
 
 ## 💻 Platform Support
 
 - **Linux (64-bit)** — fully supported  
-- **Windows** — run source code via Python, or wait for upcoming executable release
+- **Windows** — run source code via Python, or use packaged release  
 
 ---
 
@@ -57,20 +59,23 @@ Every timetable generated is **optimized, constraint-aware, and logically struct
 
 - **Python**  
 - **PyQt6** for UI management  
-- Continuous logic improvements, UI updates, and bug fixes
+- Continuous logic improvements, UI updates, and bug fixes  
 
 ---
-_____________________________________________________________________________________________________________
+
 ## 🐧 Linux Installation Manual
-_____________________________________________________________________________________________________________
+
 ### 1️⃣ System Requirements
 
-- 64-bit Linux OS (Ubuntu, Kali, Debian, Fedora, Arch, Pop!\_OS recommended)  
-- Latest Python version
-_____________________________________________________________________________________________________________
+- 64-bit Linux OS (Ubuntu, Kali, Debian, Fedora, Arch, Pop!_OS recommended)  
+- Latest Python version  
+
+---
+
 ### 2️⃣ Install Dependencies
 
-**Ubuntu / Kali / Debian**:
+**Ubuntu / Kali / Debian:**
+
 ```bash
 sudo apt update
 sudo apt install -y build-essential libssl-dev zlib1g-dev \
@@ -78,64 +83,73 @@ libncurses5-dev libncursesw5-dev libreadline-dev libsqlite3-dev \
 libgdbm-dev libdb5.3-dev libbz2-dev libexpat1-dev liblzma-dev \
 tk-dev libffi-dev wget
 ```
-_____________________________________________________________________________________________________________
-3️⃣ Download the App
 
-Go to the Releases
- section
+---
 
-Download the file named main
+## 🐧 Linux Installation Manual
 
-Place it in a separate folder to avoid clutter during updates
-_____________________________________________________________________________________________________________
-4️⃣ Make Executable
+### 3️⃣ Download the App
 
-Open the folder
+- Go to the **Releases** section of the repository  
+- Navigate to the **latest release**  
+- Download the file named **Timetable-Gen.zip**  
+- Extract the ZIP file into a separate folder  
 
-Right-click the file → Properties
+---
 
-Enable Executable as Program
+### 4️⃣ Run the Application
 
-Double-click to run
+Inside the extracted folder:
 
-On first launch: click Yes when prompted for updates.
-_____________________________________________________________________________________________________________
-5️⃣ Using the App
+- You will see dependency files — **do not modify or delete them**  
+- You will also see the main application labeled **Timetable-Gen**
 
-Modify teacher names
+To run the app:
 
-Adjust class availability
+- Double-click **Timetable-Gen**  
 
-Assign subjects
+If you encounter an executable error:
 
-Generate timetables:
+- Right-click the file → **Properties**  
+- Go to **Permissions**  
+- Enable **“Allow executing file as program”**  
+- Apply changes and run again  
 
-Class-wise
+---
 
-Teacher-wise
+### 5️⃣ Using the App
 
-Day-wise
+- Modify teacher names  
+- Adjust class availability  
+- Assign subjects  
+- Generate timetables:
+  - Class-wise  
+  - Teacher-wise  
+  - Day-wise  
 
-Makes timetable management fast, structured, and efficient
-_____________________________________________________________________________________________________________
-🪟 Windows Users
+Timetable management becomes structured, efficient, and easy to maintain.
 
-Official executable under development
+---
 
-Source code runnable with any Python compiler
-_____________________________________________________________________________________________________________
-⚠️ Trial Version Notice
+## 🪟 Windows Users
 
-This is a trial version
+- Official executable is under development  
+- Source code can be run using Python  
+- Future releases will include packaged builds  
 
-Active development continues
+---
 
-Built by USERK8
+## ⚠️ Trial Version Notice
 
-No user data is collected
-_____________________________________________________________________________________________________________
-📩 Support
+- This is a trial version  
+- Active development continues  
+- Built by USERK8  
+- No user data is collected  
 
-Email: userk8.dev@gmail.com
+---
 
-Thanks for trying STT! Your feedback helps shape smarter, future-ready schools.
+## 📩 Support
+
+Email: userk8.dev@gmail.com  
+
+Thanks for trying STT! Your feedback helps improve the system and supports building smarter, future-ready schools.
