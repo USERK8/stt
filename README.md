@@ -40,6 +40,34 @@ Every timetable generated is **optimized, constraint-aware, and logically struct
 
 ---
 
+## 🖼️ Screenshots
+
+### Home Screen
+![Home Screen](assets/Screenshot from 2026-03-27 11-52-43.png)
+
+### Class Editor and Management
+![Class Editor](assets/Screenshot from 2026-03-27 11-56-01.png)
+
+### Teacher Management
+![Teacher Management](assets/Screenshot from 2026-03-27 11-56-14.png)
+
+### Generation Options
+![Generation Options](assets/Screenshot from 2026-03-27 11-56-17.png)
+
+### Settings Menu
+![Settings Menu](assets/Screenshot from 2026-03-27 11-56-19.png)
+
+### Generation Tools
+![Generation Tools](assets/Screenshot from 2026-03-27 11-56-22.png)
+
+### Settings Help Menu
+![Settings Help](assets/Screenshot from 2026-03-27 11-56-33.png)
+
+### Settings Version Details
+![Version Details](assets/Screenshot from 2026-03-27 11-56-41.png)
+
+---
+
 ## 🔐 Privacy & Security
 
 - No client-side data collection  
@@ -83,10 +111,6 @@ libncurses5-dev libncursesw5-dev libreadline-dev libsqlite3-dev \
 libgdbm-dev libdb5.3-dev libbz2-dev libexpat1-dev liblzma-dev \
 tk-dev libffi-dev wget
 ```
-
----
-
-## 🐧 Linux Installation Manual
 
 ### 3️⃣ Download the App
 
