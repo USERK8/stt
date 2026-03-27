@@ -24,7 +24,7 @@ STT intelligently generates school timetables while respecting:
 Every timetable generated is **optimized, constraint-aware, and logically structured**.
 
 > Built for Viksit Bharat and Digital India, STT modernizes school systems — moving from manual scheduling to **efficient, tech-driven planning**.  
-> Goal: *“Make schools smarter, more organized, and future-ready.”*
+> Goal: *"Make schools smarter, more organized, and future-ready."*
 
 ---
 
@@ -43,28 +43,28 @@ Every timetable generated is **optimized, constraint-aware, and logically struct
 ## 🖼️ Screenshots
 
 ### Home Screen
-![Home Screen](assets/Screenshot from 2026-03-27 11-52-43.png)
+[![Home Screen](assets/home.png)](assets/home.png)
 
 ### Class Editor and Management
-![Class Editor](assets/Screenshot from 2026-03-27 11-56-01.png)
+[![Class Editor](assets/manage-classes.png)](assets/manage-classes.png)
 
 ### Teacher Management
-![Teacher Management](assets/Screenshot from 2026-03-27 11-56-14.png)
+[![Teacher Management](assets/manage-teachers.png)](assets/manage-teachers.png)
 
 ### Generation Options
-![Generation Options](assets/Screenshot from 2026-03-27 11-56-17.png)
+[![Generation Options](assets/gen.png)](assets/gen.png)
 
 ### Settings Menu
-![Settings Menu](assets/Screenshot from 2026-03-27 11-56-19.png)
+[![Settings Menu](assets/settings.png)](assets/settings.png)
 
 ### Generation Tools
-![Generation Tools](assets/Screenshot from 2026-03-27 11-56-22.png)
+[![Generation Tools](assets/gen-options.png)](assets/gen-options.png)
 
 ### Settings Help Menu
-![Settings Help](assets/Screenshot from 2026-03-27 11-56-33.png)
+[![Settings Help](assets/s-help.png)](assets/s-help.png)
 
 ### Settings Version Details
-![Version Details](assets/Screenshot from 2026-03-27 11-56-41.png)
+[![Version Details](assets/s-ver.png)](assets/s-ver.png)
 
 ---
 
@@ -136,7 +136,7 @@ If you encounter an executable error:
 
 - Right-click the file → **Properties**  
 - Go to **Permissions**  
-- Enable **“Allow executing file as program”**  
+- Enable **"Allow executing file as program"**  
 - Apply changes and run again  
 
 ---
